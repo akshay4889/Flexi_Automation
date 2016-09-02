@@ -1,0 +1,56 @@
+package com.fl.test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;  
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class GenericKeywords {
+	public FileInputStream fileInput;
+	public Properties prop;
+	public WebDriver driver;
+	
+	/*public void file(){
+		try{
+			fileInput = new FileInputStream(System.getProperty("user.dir")+"\\Helper.properties");
+		}
+		catch (FileNotFoundException e){
+			System.out.println("in CATCH+++++++++++++++++++++++++++++++");
+			e.printStackTrace();
+		}
+		prop = new Properties();
+		try {
+			prop.load(fileInput);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}*/
+	public GenericKeywords(){
+		System.setProperty("webdriver.gecko.driver", "F:\\Loggly\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		try{
+			fileInput = new FileInputStream(System.getProperty("user.dir")+"\\Helper.properties");
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		prop = new Properties();
+		try {
+			prop.load(fileInput);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void login(String email, String password){
+		driver.get(prop.getProperty("LoginPage"));
+		driver.findElement(By.id(prop.getProperty("LoginEmail"))).sendKeys(email);
+		driver.findElement(By.id(prop.getProperty("LoginPassword"))).sendKeys(password);
+		driver.findElement(By.xpath(prop.getProperty("LoginButton"))).click();
+	}
+	
+}

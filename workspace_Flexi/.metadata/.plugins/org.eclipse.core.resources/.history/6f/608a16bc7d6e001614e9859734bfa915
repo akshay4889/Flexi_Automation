@@ -1,0 +1,4 @@
+LoginPage=https://app.flexiloans.in/login
+LoginEmail=inputEmail
+LoginPassword=inputPassword
+LoginButton=//button[text()='Sign in']

@@ -1,0 +1,33 @@
+package AutomationFrmwork;
+
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.fl.test.GenericKeywords;
+
+public class Specs {
+	GenericKeywords GenKeywords = new GenericKeywords();
+	WebDriver driver = GenKeywords.driver;
+	Properties Objects = GenKeywords.propObj;
+	
+	@Test
+	public void loginToApp() {
+		//GenKeywords.file();
+		GenKeywords.login(Objects.getProperty("EmailID")+"@"+Objects.getProperty("EmailIDend"), Objects.getProperty("Password"));
+	}
+	
+	@BeforeTest
+	public void beforeTest() {
+		driver.manage().window().maximize();
+	}
+
+	@AfterTest
+	public void afterTest() {
+		driver.quit();
+	}
+
+}

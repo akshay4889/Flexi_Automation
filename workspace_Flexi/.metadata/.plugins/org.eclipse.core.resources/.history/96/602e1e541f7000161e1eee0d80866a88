@@ -1,0 +1,32 @@
+package com.fl.test;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import com.fl.test.GenericKeywords;
+
+
+public class AutomationTestCases {
+	
+	WebDriver driver;
+	GenericKeywords keywords = new GenericKeywords();
+	
+	@Test
+	public void loginToApp() {
+		keywords.login(CONFIG.getProperty("EmailID")+"@"+CONFIG.getProperty("EmailIDend"), CONFIG.getProperty("Password"));
+	}
+	
+	@BeforeTest
+	public void beforeTest() {
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+	}
+
+	@AfterTest
+	public void afterTest() {
+		driver.quit();
+	}
+
+}

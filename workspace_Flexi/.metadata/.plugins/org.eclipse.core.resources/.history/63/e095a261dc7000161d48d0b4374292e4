@@ -1,0 +1,43 @@
+package com.fl.test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;  
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class GenericKeywords {
+	public FileInputStream fileInput;
+	public Properties prop;
+	public WebDriver driver;
+	
+	public void file(){
+		try{
+			final String dir = System.getProperty("user.dir");
+	        System.out.println("current dir = " + dir+"\\src\\Helper.properties");
+			fileInput = new FileInputStream(System.getProperty("Helper.properties"));
+		}
+		catch (FileNotFoundException e){
+			System.out.println("in CATCH+++++++++++++++++++++++++++++++");
+			e.printStackTrace();
+		}
+		prop = new Properties();
+		try {
+			prop.load(fileInput);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void login(String email, String password){
+		driver = new FirefoxDriver();
+		driver.get(prop.getProperty("LoginPage"));
+		driver.findElement(By.id(prop.getProperty("LoginEmail"))).sendKeys(email);
+		driver.findElement(By.id(prop.getProperty("LoginPassword"))).sendKeys(password);
+		driver.findElement(By.xpath(prop.getProperty("LoginButton"))).click();
+	}
+	
+}

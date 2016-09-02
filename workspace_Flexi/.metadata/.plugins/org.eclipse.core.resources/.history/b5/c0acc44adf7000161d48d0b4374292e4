@@ -1,0 +1,32 @@
+package AutomationFrmwork;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.fl.test.GenericKeywords;
+
+public class Specs {
+	WebDriver driver;
+	GenericKeywords GenKeywords = new GenericKeywords();
+	
+	@Test
+	public void loginToApp() {
+		//GenKeywords.file();
+		GenKeywords.login(GenKeywords.prop.getProperty("EmailID")+"@"+GenKeywords.prop.getProperty("EmailIDend"), GenKeywords.prop.getProperty("Password"));
+	}
+	
+	@BeforeTest
+	public void beforeTest() {
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+	}
+
+	@AfterTest
+	public void afterTest() {
+		driver.quit();
+	}
+
+}

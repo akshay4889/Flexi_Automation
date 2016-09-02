@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;FlexiLoans_Automation_Framework&apos;&#x0D;&#x0A;- Original project: &apos;FlexiLoans_Automation_Framework&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     FlexiLoans_Automation_Framework/src/com.fl.com&#x0D;&#x0A;     FlexiLoans_Automation_Framework/src/com.fl.com.fl&#x0D;&#x0A;     FlexiLoans_Automation_Framework/src/com.fl.com.fl.test" description="Delete elements" element1="/src&lt;com.fl.com.fl.test" element2="/src&lt;com.fl.com.fl" element3="/src&lt;com.fl.com" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1472454524925" subPackages="false" version="1.0"/>
+</session>

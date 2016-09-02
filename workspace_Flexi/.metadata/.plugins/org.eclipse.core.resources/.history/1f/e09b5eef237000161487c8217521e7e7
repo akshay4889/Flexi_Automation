@@ -1,0 +1,45 @@
+package com.fl.test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;  
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class GenericKeywords {
+	public static FileInputStream fileInput;
+	private static Properties prop;
+	public WebDriver driver;
+	
+	public void file(){
+		try{
+			fileInput = new FileInputStream(System.getProperty("user.dir"+"//config//Helper.properties"));
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		setProp(new Properties());
+		try {
+			getProp().load(fileInput);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void login(String email, String password){
+		driver.findElement(By.id(getProp().getProperty("LoginEmail"))).sendKeys(email);
+		driver.findElement(By.id(getProp().getProperty("LoginPassword"))).sendKeys(password);
+		driver.findElement(By.xpath(getProp().getProperty("LoginButton"))).click();
+	}
+
+	public static Properties getProp() {
+		return prop;
+	}
+
+	public static void setProp(Properties prop) {
+		GenericKeywords.prop = prop;
+	}
+	
+}
