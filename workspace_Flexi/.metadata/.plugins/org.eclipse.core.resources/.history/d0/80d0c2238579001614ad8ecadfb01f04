@@ -1,0 +1,35 @@
+package AutomationFrmwork;
+
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.fl.test.GenericKeywords;
+
+public class Dashboard {
+	GenericKeywords GenKeywords = new GenericKeywords();
+	WebDriver driver = GenKeywords.driver;
+	Properties Objects = GenKeywords.propObj;
+	Properties Testdata = GenKeywords.propTestdata;
+	
+	@BeforeTest
+	public void launchBrowser() {
+		driver.manage().window().maximize();
+	}
+	
+	@Test(priority=4)
+	public void VerifyApplicationPage() throws InterruptedException {
+		GenKeywords.login(Testdata.getProperty("EmailID"), Testdata.getProperty("Password"));
+		driver.findElement(By.xpath(Objects.getProperty("ApplicationPageClick"))).click();
+		Reporter.log("On Application Page");
+		Thread.sleep(Integer.parseInt(Objects.getProperty("ThreeMilliSec")));
+		Assert.assertTrue(driver.findElement(By.xpath(Objects.getProperty("VerifyApplicationPage"))).isDisplayed());
+		//GenKeywords.logout();
+	}
+	
+}

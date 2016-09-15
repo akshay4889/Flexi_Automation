@@ -1,0 +1,38 @@
+package AutomationFrmwork;
+
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import com.fl.test.GenericKeywords;
+
+public class BaseClass {
+
+	WebDriver driver;
+	GenericKeywords GenKeywords = new GenericKeywords();
+	Properties Objects = GenKeywords.propObj;
+	Properties Testdata = GenKeywords.propTestdata;
+	
+	@BeforeSuite
+	public void launchBrowser() throws NumberFormatException, InterruptedException {
+		System.out.print("in login+++++++++++");
+		driver = GenKeywords.browser();
+		driver.manage().window().maximize();
+		driver.get(Objects.getProperty("LoginPage"));
+		Thread.sleep(Integer.parseInt(Objects.getProperty("FiveMilliSec")));
+	}
+	
+	@AfterSuite
+	public void terminateBrowser() {
+		try { 
+	        if (driver != null) { 
+	            driver.quit(); 
+	        } 
+	    } catch (Exception e) { 
+	        System.out.println(e.getMessage()); 
+	    }
+	    driver = null;
+	}
+}

@@ -1,0 +1,21 @@
+LoginPage=https://app.flexiloans.in/login
+LoginEmail=inputEmail
+LoginPassword=inputPassword
+LoginButton=//button[text()='Sign in']
+LoginPageTitle=Login | Flexiloans
+IncorrectUsername=Username you've entered is incorrect.
+IncorrectPassword=Username or Password is Incorrect
+IncorrectUsernameAndPasswordXPATH=//div[@id="sign_form"]/p[contains(text(),'ncorrect')]
+logout=//li/a[text()=' Log Out ']
+
+HomePageTitle=Flexiloans
+WelcomeKeyword=//strong[contains(text(),'WELCOME:')]
+Welcome=WELCOME:
+
+ApplicationPageClick=//a[@href='/user_application']
+VerifyApplicationPage=//th[text()='Application No.']
+
+FiveMilliSec=5000
+ThreeMilliSec=3000
+
+SettingSaveChanges=update_password

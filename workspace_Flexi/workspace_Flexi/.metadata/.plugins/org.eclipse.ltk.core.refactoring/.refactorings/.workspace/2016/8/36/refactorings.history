@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;FlexiLoans_Automation_Framework&apos; to &apos;Automation_Framework&apos;" description="Rename resource &apos;FlexiLoans_Automation_Framework&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/FlexiLoans_Automation_Framework" name="Automation_Framework" stamp="1472555765883" updateReferences="true"/>
+</session>

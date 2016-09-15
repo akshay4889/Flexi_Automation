@@ -3,13 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="AutomationFrmwork.Specs">
+      <class name="AutomationFrmwork.Dashboard">
         <methods>
           <include name="launchBrowser"/>
-          <include name="loginToApp"/>
           <include name="terminateBrowser"/>
+          <include name="VerifyUploadDocPage"/>
+          <include name="RedirectToLoginPage"/>
         </methods>
-      </class> <!-- AutomationFrmwork.Specs -->
+      </class> <!-- AutomationFrmwork.Dashboard -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

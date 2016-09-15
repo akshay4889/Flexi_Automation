@@ -1,0 +1,58 @@
+package AutomationFrmwork;
+
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.fl.test.GenericKeywords;
+
+public class Dashboard {
+	WebDriver driver;
+	GenericKeywords GenKeywords = new GenericKeywords();
+	Properties Objects = GenKeywords.propObj;
+	Properties Testdata = GenKeywords.propTestdata;
+	
+	@BeforeTest
+	public void launchBrowser() {
+		driver = GenKeywords.driver;
+		driver.manage().window().maximize();
+	}
+	
+	@Test(priority=1)
+	public void VerifyApplicationPage() throws InterruptedException {
+		GenKeywords.login(Testdata.getProperty("EmailID"), Testdata.getProperty("Password"));
+		driver.findElement(By.xpath(Objects.getProperty("ApplicationPageClick"))).click();
+		Reporter.log("On Application Page");
+		Thread.sleep(Integer.parseInt(Objects.getProperty("ThreeMilliSec")));
+		Assert.assertTrue(driver.findElement(By.xpath(Objects.getProperty("VerifyApplicationPage"))).isDisplayed());
+		//GenKeywords.logout();
+	}
+	
+	@Test(priority=2)
+	public void VerifySettingsPage() throws InterruptedException {
+		GenKeywords.login(Testdata.getProperty("EmailID"), Testdata.getProperty("Password"));
+		driver.findElement(By.xpath(Objects.getProperty("SettingsPageClick"))).click();
+		Reporter.log("On Settings Page");
+		Thread.sleep(Integer.parseInt(Objects.getProperty("ThreeMilliSec")));
+		Assert.assertTrue(driver.findElement(By.name(Objects.getProperty("SettingSaveChanges"))).isDisplayed());
+		//GenKeywords.logout();
+	}
+
+	@AfterTest
+	public void terminateBrowser() {
+		try { 
+	        if (driver != null) { 
+	            driver.quit(); 
+	        } 
+	    } catch (Exception e) { 
+	        System.out.println(e.getMessage()); 
+	    }
+	    driver = null;
+	}
+}

@@ -1,0 +1,66 @@
+package com.fl.test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;  
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.MarionetteDriver;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+public class GenericKeywords {
+	public static WebDriver driverX;
+	public FileInputStream fileInputObj;
+	public FileInputStream fileInputTest;
+	public Properties propObj;
+	public Properties propTestdata;
+	public String objectsFilePath = "\\objects\\Object.properties";
+	public String testdataFilePath = "\\Testdata\\Testdata.properties";
+	
+	public GenericKeywords(){
+		try{
+			fileInputObj = new FileInputStream(System.getProperty("user.dir") + objectsFilePath);
+			fileInputTest = new FileInputStream(System.getProperty("user.dir") + testdataFilePath);
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		propObj = new Properties();
+		propTestdata = new Properties();
+		try {
+			propObj.load(fileInputObj);
+			propTestdata.load(fileInputTest);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public WebDriver browser(){
+		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\geckodriver.exe");
+		driverX = new MarionetteDriver();
+		return driverX;
+	}
+	
+	public void login(WebDriver driver, String email, String password) throws InterruptedException{
+		Reporter.log("Application launched.");
+		driver.findElement(By.id(propObj.getProperty("LoginEmail"))).sendKeys(email);
+		driver.findElement(By.id(propObj.getProperty("LoginPassword"))).sendKeys(password);
+		driver.findElement(By.xpath(propObj.getProperty("LoginButton"))).click();
+		Thread.sleep(Integer.parseInt(propObj.getProperty("FiveMilliSec")));
+		Reporter.log("Successfully logged into Application.");
+		Thread.sleep(Integer.parseInt(propObj.getProperty("ThreeMilliSec")));
+		Assert.assertEquals(driver.getTitle(), propObj.getProperty("HomePageTitle"));
+		Assert.assertTrue(driver.findElement(By.xpath(propObj.getProperty("WelcomeKeyword"))).getText().contains(propObj.getProperty("Welcome")));
+	}
+	
+	public void logout(WebDriver driver) throws InterruptedException{
+		//driver.findElement(By.xpath(propObj.getProperty("HomePageTitle"))).click();
+		driver.findElement(By.xpath(propObj.getProperty("logout"))).click();
+		Thread.sleep(Integer.parseInt(propObj.getProperty("ThreeMilliSec")));
+		Assert.assertTrue(driver.findElement(By.xpath(propObj.getProperty("LoginButton"))).isDisplayed());
+	}
+}

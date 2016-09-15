@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" threadcount="1">
+  <test name="Test" group-by-instances="true" parallel="tests">
+    <classes>
+      <class name="AutomationFrmwork.Login"/>
+    <class name="AutomationFrmwork.Dashboard"></class></classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
